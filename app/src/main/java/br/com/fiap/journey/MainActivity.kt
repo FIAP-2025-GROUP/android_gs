@@ -1,0 +1,56 @@
+package br.com.fiap.journey
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import br.com.fiap.journey.screens.LearnScreen
+import br.com.fiap.journey.screens.LoginScreen
+import br.com.fiap.journey.screens.RegisterScreen
+import br.com.fiap.journey.ui.theme.JourneyTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            JourneyTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+
+                    val navController = rememberNavController()
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = "login"
+                    )
+                    {
+                        composable("login") {
+                            LoginScreen(navController)
+                        }
+                        composable("register") {
+                            RegisterScreen(navController)
+                        }
+                        composable("learn") {
+                            LearnScreen(navController)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun RegisterScreenPreview() {
+
+}

@@ -1,6 +1,5 @@
-package br.com.fiap.journey.screens
-
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -18,6 +16,8 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
@@ -32,12 +32,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import br.com.fiap.journey.model.Usuario
 
 @Composable
-fun LearnScreen(
-    navController: NavController){
-
+fun SearchScreen(navController: NavController){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -75,7 +72,7 @@ fun LearnScreen(
                 )
 
                 IconButton(
-                    onClick = {navController.navigate("edit/${1L}")}
+                    onClick = {navController.navigate("edit")}
                 ){
                     Icon(
                         imageVector = Icons.Default.AccountCircle,
@@ -87,91 +84,32 @@ fun LearnScreen(
             }
 
             Text(
-                text = "What will you learn today ?",
+                text = "Tell us about the topic",
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
                 textAlign = TextAlign.Center,
             )
 
-            Column(
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(300.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFFE8E8E8)
+                ),
+                shape = RoundedCornerShape(32.dp)
+
 
             ){
-                Button(
-                    onClick = { navController.navigate("search") },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp),
-                    shape = RoundedCornerShape(28.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF0277BD)
-                    ),
-                    elevation = ButtonDefaults.buttonElevation(
-                        defaultElevation = 8.dp,
-                        pressedElevation = 12.dp
-                    )
-                ) {
-                    Text(
-                        text = "Hard Skills",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(
-                    onClick = { navController.navigate("search") },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp),
-                    shape = RoundedCornerShape(28.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF0277BD)
-                    ),
-                    elevation = ButtonDefaults.buttonElevation(
-                        defaultElevation = 8.dp,
-                        pressedElevation = 12.dp
-                    )
-                ) {
-                    Text(
-                        text = "Soft Skills",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(
-                    onClick = { navController.navigate("search") },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp),
-                    shape = RoundedCornerShape(28.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF0277BD)
-                    ),
-                    elevation = ButtonDefaults.buttonElevation(
-                        defaultElevation = 8.dp,
-                        pressedElevation = 12.dp
-                    )
-                ) {
-                    Text(
-                        text = "How to use AI",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                }
-
+                Text(
+                    text = "I need to learn excel to...",
+                    modifier = Modifier.padding(16.dp)
+                )
             }
+
             OutlinedButton(
-                onClick = { navController.navigate("register") },
+                onClick = { navController.navigate("answer") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
@@ -187,11 +125,13 @@ fun LearnScreen(
                 )
             ) {
                 Text(
-                    text = "Voltar",
+                    text = "Aprender",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Medium
                 )
             }
+
         }
     }
+
 }

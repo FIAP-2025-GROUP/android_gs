@@ -12,8 +12,15 @@ class UsuarioRepository(context: Context) {
         return db.salvar(usuario)
     }
 
+    fun atualizar(usuario:Usuario): Int{
+        return db.atualizar(usuario)
+    }
     fun buscarPorEmail(email: String): Usuario? {
         return db.buscarPorEmail(email)
+    }
+
+    fun buscarPorId(id: Long): Usuario? {
+        return db.buscarPorId(id = id)
     }
 }
 

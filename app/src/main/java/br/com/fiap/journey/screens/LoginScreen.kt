@@ -46,16 +46,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import br.com.fiap.journey.LoginViewModel
 import br.com.fiap.journey.R
-
-// --- CORREÇÕES PRINCIPAIS AQUI ---
-// 1. Remova a importação errada
-// import br.com.fiap.journey.LoginViewModel // <--- REMOVER ESTA LINHA
-
-// 2. Adicione as importações corretas para seus arquivos, assumindo que estão no pacote "screens"
 import br.com.fiap.journey.AuthState
-
-// --- FIM DAS CORREÇÕES ---
-
 
 @Composable
 fun LoginScreen(
@@ -68,9 +59,7 @@ fun LoginScreen(
 
     val authState by loginViewModel.authState.collectAsState()
 
-    // 3. Efeito para navegar quando o login for bem-sucedido
     LaunchedEffect(authState) {
-        // Use a referência direta para o SEU enum, não a do Firebase
         if (authState == AuthState.SUCCESS) {
             navController.navigate("learn") {
                 popUpTo(navController.graph.startDestinationId) {

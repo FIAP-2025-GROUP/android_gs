@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
-    // Instancia o seu UsuarioRepository
     private val repository = UsuarioRepository(application)
     private val _authState = MutableStateFlow(AuthState.IDLE)
     val authState: StateFlow<AuthState> = _authState

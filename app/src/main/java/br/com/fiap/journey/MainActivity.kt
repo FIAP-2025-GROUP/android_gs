@@ -1,5 +1,6 @@
 package br.com.fiap.journey
 
+import SearchScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,9 +10,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import br.com.fiap.journey.screens.AnswerScreen
+import br.com.fiap.journey.screens.EditScreen
 import br.com.fiap.journey.screens.LearnScreen
 import br.com.fiap.journey.screens.LoginScreen
 import br.com.fiap.journey.screens.RegisterScreen
@@ -40,6 +45,19 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("learn") {
                             LearnScreen(navController)
+                        }
+                        composable("search") {
+                            SearchScreen(navController)
+                        }
+                        composable("answer") {
+                            AnswerScreen(navController)
+                        }
+                        composable(
+                            "edit/{usuarioId}",
+                            arguments = listOf(navArgument("usuarioId"){type = NavType.LongType})
+                        ){
+                            val usuarioId = it.arguments?.getLong("usuarioId") ?: 0L
+                            EditScreen(navController, usuarioId = usuarioId)
                         }
                     }
                 }

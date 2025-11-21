@@ -1,6 +1,6 @@
 package br.com.fiap.journey
 
-import SearchScreen
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -46,9 +46,7 @@ class MainActivity : ComponentActivity() {
                         composable("learn") {
                             LearnScreen(navController)
                         }
-                        composable("search") {
-                            SearchScreen(navController)
-                        }
+
                         composable("answer") {
                             AnswerScreen(navController)
                         }

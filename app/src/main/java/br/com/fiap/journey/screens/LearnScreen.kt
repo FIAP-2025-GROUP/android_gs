@@ -100,7 +100,7 @@ fun LearnScreen(
 
             ){
                 Button(
-                    onClick = { navController.navigate("search") },
+                    onClick = { navController.navigate("answer") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),
@@ -124,7 +124,7 @@ fun LearnScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
-                    onClick = { navController.navigate("search") },
+                    onClick = { navController.navigate("answer") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),
@@ -148,7 +148,7 @@ fun LearnScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
-                    onClick = { navController.navigate("search") },
+                    onClick = { navController.navigate("answer") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),
@@ -166,6 +166,31 @@ fun LearnScreen(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(
+                    onClick = { navController.navigate("answer") },
+                    modifier = Modifier
+                        .fillMaxWidth()
+
+                        .height(56.dp),
+                    shape = RoundedCornerShape(28.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF0277BD)
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(
+                        defaultElevation = 8.dp,
+                        pressedElevation = 12.dp
+                    )
+                ) {
+                    Text(
+                        text = "Como conseguir uma nova oportunidade",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
                     )
                 }
 

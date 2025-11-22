@@ -15,7 +15,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import br.com.fiap.journey.screens.AnswerScreen
+import br.com.fiap.journey.screens.AnswerHardSkillsScreen
+import br.com.fiap.journey.screens.AnswerNewOportunityScreen
+import br.com.fiap.journey.screens.AnswerSoftSkillsScreen
+import br.com.fiap.journey.screens.AnswerUseAiScreen
 import br.com.fiap.journey.screens.EditScreen
 import br.com.fiap.journey.screens.LearnScreen
 import br.com.fiap.journey.screens.LoginScreen
@@ -43,13 +46,50 @@ class MainActivity : ComponentActivity() {
                         composable("register") {
                             RegisterScreen(navController)
                         }
-                        composable("learn") {
+                        composable("forgot") {
                             LearnScreen(navController)
                         }
-
-                        composable("answer") {
-                            AnswerScreen(navController)
+                        composable(
+                            "learn/{usuarioId}",
+                            arguments = listOf(navArgument("usuarioId") { type = NavType.LongType })
+                        ) {
+                            val usuarioId = it.arguments?.getLong("usuarioId") ?: 0L
+                            LearnScreen(navController, usuarioId = usuarioId)
                         }
+
+                        composable(
+                            "answerHardSkills/{usuarioId}",
+                            arguments = listOf(navArgument("usuarioId") { type = NavType.LongType })
+                        ) {
+
+                            val usuarioId = it.arguments?.getLong("usuarioId") ?: 0L
+                            AnswerHardSkillsScreen(navController, usuarioId = usuarioId)
+                        }
+                        composable(
+                            "answerSoftSkills/{usuarioId}",
+                            arguments = listOf(navArgument("usuarioId") { type = NavType.LongType })
+                        ) {
+
+                            val usuarioId = it.arguments?.getLong("usuarioId") ?: 0L
+                            AnswerSoftSkillsScreen(navController, usuarioId = usuarioId)
+                        }
+                        composable(
+                            "answerUseAi/{usuarioId}",
+                            arguments = listOf(navArgument("usuarioId") { type = NavType.LongType })
+                        ) {
+
+                            val usuarioId = it.arguments?.getLong("usuarioId") ?: 0L
+                            AnswerUseAiScreen(navController, usuarioId = usuarioId)
+                        }
+                        composable(
+                            "answerNewOportunity/{usuarioId}",
+                            arguments = listOf(navArgument("usuarioId") { type = NavType.LongType })
+                        ) {
+
+                            val usuarioId = it.arguments?.getLong("usuarioId") ?: 0L
+                            AnswerNewOportunityScreen(navController, usuarioId = usuarioId)
+                        }
+
                         composable(
                             "edit/{usuarioId}",
                             arguments = listOf(navArgument("usuarioId"){type = NavType.LongType})

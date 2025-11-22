@@ -4,12 +4,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -40,6 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -72,7 +76,7 @@ fun EditScreen(navController: NavController, usuarioId: Long){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .safeDrawingPadding()
+            .windowInsetsPadding(WindowInsets.statusBars)
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
@@ -109,33 +113,11 @@ fun EditScreen(navController: NavController, usuarioId: Long){
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = buildAnnotatedString {
-                        append("Start your")
-                        withStyle(style = SpanStyle(color = Color(0xFF80DEEA))) {
-                            append("journey")
-                        }
-                    },
-                    fontSize = 28.sp,
+                    text = "JOURNEY",
+                    fontSize = 36.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
                     textAlign = TextAlign.Center
-                )
-
-                Text(
-                    text = "toward the",
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.White,
-                    textAlign = TextAlign.Center
-                )
-
-                Text(
-                    text = "FUTURE HERE!",
-                    fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF80DEEA),
-                    textAlign = TextAlign.Center,
-                    letterSpacing = 2.sp
                 )
             }
 
@@ -146,7 +128,7 @@ fun EditScreen(navController: NavController, usuarioId: Long){
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-                shape = RoundedCornerShape(topStart = 80.dp, topEnd = 80.dp),
+                shape = RoundedCornerShape(40.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = Color(0xFFE8E8E8)
                 ),
@@ -330,8 +312,15 @@ fun EditForm(
         },
         modifier = Modifier.fillMaxWidth().height(50.dp),
         shape = RoundedCornerShape(30.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF80DEEA))
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF80DEEA)
+        )
     ) {
-        Text(text = "Salvar dados", color = Color.Black, fontWeight = FontWeight.Bold)
+        Text(
+            text = "Atualizar seus dados",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF0A0E27)
+        )
     }
 }

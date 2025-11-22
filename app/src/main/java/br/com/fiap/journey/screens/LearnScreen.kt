@@ -6,12 +6,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -36,11 +39,13 @@ import br.com.fiap.journey.model.Usuario
 
 @Composable
 fun LearnScreen(
-    navController: NavController){
+    navController: NavController, usuarioId: Long
+){
 
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.statusBars)
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
@@ -75,7 +80,7 @@ fun LearnScreen(
                 )
 
                 IconButton(
-                    onClick = {navController.navigate("edit/${1L}")}
+                    onClick = {navController.navigate("edit/${usuarioId}")}
                 ){
                     Icon(
                         imageVector = Icons.Default.AccountCircle,
@@ -87,7 +92,7 @@ fun LearnScreen(
             }
 
             Text(
-                text = "What will you learn today ?",
+                text = "O que você vai aprender hoje ?",
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
@@ -100,7 +105,7 @@ fun LearnScreen(
 
             ){
                 Button(
-                    onClick = { navController.navigate("answer") },
+                    onClick = { navController.navigate("answerHardSkills/$usuarioId") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),
@@ -124,7 +129,7 @@ fun LearnScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
-                    onClick = { navController.navigate("answer") },
+                    onClick = { navController.navigate("answerSoftSkills/$usuarioId") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),
@@ -148,7 +153,7 @@ fun LearnScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
-                    onClick = { navController.navigate("answer") },
+                    onClick = { navController.navigate("answerUseAi/$usuarioId") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(56.dp),
@@ -162,7 +167,7 @@ fun LearnScreen(
                     )
                 ) {
                     Text(
-                        text = "How to use AI",
+                        text = "Como usar IA",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -172,7 +177,7 @@ fun LearnScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
-                    onClick = { navController.navigate("answer") },
+                    onClick = { navController.navigate("answerNewOportunity/$usuarioId") },
                     modifier = Modifier
                         .fillMaxWidth()
 
@@ -196,7 +201,7 @@ fun LearnScreen(
 
             }
             OutlinedButton(
-                onClick = { navController.navigate("register") },
+                onClick = { navController.navigate("login") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),

@@ -12,7 +12,9 @@ import kotlinx.coroutines.launch
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = UsuarioRepository(application)
-    private val _authState = MutableStateFlow(AuthState.IDLE)
+
+    // O tipo do StateFlow agora é a sealed class
+    private val _authState = MutableStateFlow<AuthState>(AuthState.IDLE)
     val authState: StateFlow<AuthState> = _authState
 
     fun login(email: String, senha: String) {
@@ -30,8 +32,10 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
             val user = repository.buscarPorEmail(email)
 
+            // Se o usuário for encontrado e a senha bater...
             if (user != null && user.senha == senha) {
-                _authState.value = AuthState.SUCCESS
+                // ...emita o estado de SUCESSO com o ID do usuário.
+                _authState.value = AuthState.SUCCESS(user.id)
             } else {
                 _authState.value = AuthState.FAILURE
                 Toast.makeText(getApplication(), "Email ou senha inválidos.", Toast.LENGTH_SHORT)
@@ -39,7 +43,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
-
 
     fun resetAuthState() {
         _authState.value = AuthState.IDLE

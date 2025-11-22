@@ -63,7 +63,7 @@ fun RegisterScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .safeDrawingPadding()
+            .windowInsetsPadding(WindowInsets.statusBars)
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
@@ -101,9 +101,9 @@ fun RegisterScreen(navController: NavController) {
             ) {
                 Text(
                     text = buildAnnotatedString {
-                        append("Start your")
+                        append("Inicie sua ")
                         withStyle(style = SpanStyle(color = Color(0xFF80DEEA))) {
-                            append("journey")
+                            append("jornada")
                         }
                     },
                     fontSize = 28.sp,
@@ -113,7 +113,7 @@ fun RegisterScreen(navController: NavController) {
                 )
 
                 Text(
-                    text = "toward the",
+                    text = "em direção ao",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.White,
@@ -121,7 +121,7 @@ fun RegisterScreen(navController: NavController) {
                 )
 
                 Text(
-                    text = "FUTURE HERE!",
+                    text = "FUTURO AQUI!",
                     fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF80DEEA),

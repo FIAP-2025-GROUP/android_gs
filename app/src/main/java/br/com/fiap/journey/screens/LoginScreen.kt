@@ -5,11 +5,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -60,8 +63,11 @@ fun LoginScreen(
     val authState by loginViewModel.authState.collectAsState()
 
     LaunchedEffect(authState) {
-        if (authState == AuthState.SUCCESS) {
-            navController.navigate("learn") {
+        // Verifica se o estado é SUCESSO e extrai o ID
+        if (authState is AuthState.SUCCESS) {
+            val userId = (authState as AuthState.SUCCESS).userId
+            // Navega para a tela de aprendizado com o ID do usuário
+            navController.navigate("learn/$userId") {
                 popUpTo(navController.graph.startDestinationId) {
                     inclusive = true
                 }
@@ -73,6 +79,7 @@ fun LoginScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.statusBars)
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
@@ -92,8 +99,8 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(40.dp))
             AstronautSection()
             Spacer(modifier = Modifier.height(32.dp))
-            Text(text = "Your JOURNEY", fontSize = 36.sp, fontWeight = FontWeight.Bold, color = Color.White, textAlign = TextAlign.Center)
-            Text(text = "starts here", fontSize = 28.sp, fontWeight = FontWeight.Light, color = Color.White, textAlign = TextAlign.Center)
+            Text(text = "Sua JORNADA", fontSize = 36.sp, fontWeight = FontWeight.Bold, color = Color.White, textAlign = TextAlign.Center)
+            Text(text = "começa aqui", fontSize = 28.sp, fontWeight = FontWeight.Light, color = Color.White, textAlign = TextAlign.Center)
             Spacer(modifier = Modifier.height(40.dp))
 
             LoginForm(
@@ -104,8 +111,8 @@ fun LoginScreen(
             )
 
             Spacer(modifier = Modifier.height(8.dp))
-            TextButton(onClick = { /*TODO*/ }, modifier = Modifier.align(Alignment.End)) {
-                Text(text = "Forgot password?", color = Color.White, fontSize = 14.sp)
+            TextButton(onClick = { navController.navigate("forgot") }, modifier = Modifier.align(Alignment.End)) {
+                Text(text = "Esqueceu a senha?", color = Color.White, fontSize = 14.sp)
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -125,11 +132,9 @@ fun LoginScreen(
                     defaultElevation = 8.dp,
                     pressedElevation = 12.dp
                 ),
-                // Use a referência direta para o SEU enum
-                enabled = authState != AuthState.LOADING
+                enabled = authState !is AuthState.LOADING
             ) {
-                // E aqui também
-                if (authState == AuthState.LOADING) {
+                if (authState is AuthState.LOADING) {
                     CircularProgressIndicator(
                         modifier = Modifier.size(24.dp),
                         color = Color.White,
@@ -146,7 +151,7 @@ fun LoginScreen(
             }
 
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "or", color = Color.White.copy(alpha = 0.6f), fontSize = 14.sp)
+            Text(text = "ou", color = Color.White.copy(alpha = 0.6f), fontSize = 14.sp)
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedButton(
                 onClick = { navController.navigate("register") },
@@ -160,13 +165,13 @@ fun LoginScreen(
                     brush = Brush.horizontalGradient(colors = listOf(Color(0xFF80DEEA), Color(0xFF00BCD4)))
                 )
             ) {
-                Text(text = "New account", fontSize = 18.sp, fontWeight = FontWeight.Medium)
+                Text(text = "Criar conta", fontSize = 18.sp, fontWeight = FontWeight.Medium)
             }
         }
     }
 }
 
-// O restante do seu código (LoginForm, AstronautSection, etc.) permanece o mesmo e está correto.
+// O restante do seu código (LoginForm, AstronautSection, etc.) permanece o mesmo.
 @Composable
 fun LoginForm(
     email: String,
@@ -245,11 +250,11 @@ fun AstronautSection() {
         ) {
             Image(
                 painter = painterResource(id = R.drawable.logo_journey),
-                contentDescription = "Astronaut on rocket",
+                contentDescription = "Astronauta em um foguete",
                 modifier = Modifier.size(180.dp)
             )
             Text(
-                text = "Learning toward the future",
+                text = "Aprendendo em direção ao futuro",
                 color = Color.White.copy(alpha = 0.8f),
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center,

@@ -62,6 +62,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("androidx.compose.material:material-icons-extended")
+    implementation(libs.androidx.material3)
+    implementation("com.google.android.material:material:1.12.0")
 
     implementation(libs.androidx.room.runtime) // O runtime é de fato a biblioteca do Room. Possui todas as classes necessárias para fazer a persistência de dados
     annotationProcessor(libs.androidx.room.compiler) // Vai fazer a compilação de anotações das classes
